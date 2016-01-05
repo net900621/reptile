@@ -1,9 +1,8 @@
-var http = require('http');    //HTTP协议模块
+var http = require('http');
 var fs = require("fs");
+
 var fun = function(url){
     http.get(url, function(res) {
-        // console.log("响应：" + res.statusCode);
-        // console.log("headers: ", res.headers);
         var _data = '';
         res.on('data', function (data) {
             _data += data;
