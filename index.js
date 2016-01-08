@@ -11,7 +11,6 @@ var fun = function(url){
             var _crawler = _data.match(/src=\"([^[\"|#]*)\"|src=\'([^[\'|#]]*)\'/g).join('').split('src=');
             _crawler.splice(0, 1);
             for (var i = 0; i < _crawler.length; i++) {
-                console.log(!_crawler[i].match(/\.[^\.]*/g).pop().match(/jpg|png/g))
 
                 if (!_crawler[i].match(/\.[^\.]*/g).pop().match(/jpg|png/g)) {
                     return;
