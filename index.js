@@ -1,9 +1,19 @@
 var http = require('http');
 var fs = require("fs");
+var parse = require('url').parse;
 
 var fun = function(url){
+    if (!fs.existsSync('./pic')) {
+        fs.mkdirSync('./pic');
+    }
+
     http.get(url, function(res) {
+        
         var _data = '';
+
+        var _url = parse(url)
+        var host = _url.host;
+
         res.on('data', function (data) {
             _data += data;
         });
@@ -16,9 +26,12 @@ var fun = function(url){
                     return;
                 };
 
+                var picUrl = _crawler[i].replace(/\'|\"/g, '')
+                picUrl = parse(picUrl).host ? picUrl : host + picUrl;
+
                 http.get(_crawler[i].replace(/\'|\"/g, ''), function(_res) {
                     var _data = '';
-                    _res.setEncoding("binary"); 
+                    _res.setEncoding("binary");
                     _res.on('data', function(data){
                         _data += data;
                     }).on('end', function(data){
